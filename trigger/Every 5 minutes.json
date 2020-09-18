@@ -1,0 +1,24 @@
+{
+	"name": "Every 5 minutes",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "ExecuteAnotherPipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-09-18T04:55:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

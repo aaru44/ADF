@@ -1,0 +1,27 @@
+{
+	"name": "Blob_DEST_Incremental_Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Incremental_Blob_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('incremental_',pipeline().RunId,'.txt')",
+					"type": "Expression"
+				},
+				"container": "incremental"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

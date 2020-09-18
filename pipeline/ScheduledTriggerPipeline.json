@@ -1,0 +1,50 @@
+{
+	"name": "ScheduledTriggerPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait For Setting The Value of a Variable",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
+				}
+			},
+			{
+				"name": "Set File Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Wait For Setting The Value of a Variable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "myFileName",
+					"value": {
+						"value": "@pipeline().parameters.FileName",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"FileName": {
+				"type": "string",
+				"defaultValue": "Test"
+			}
+		},
+		"variables": {
+			"myFileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-18T03:49:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

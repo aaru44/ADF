@@ -1,0 +1,96 @@
+{
+	"name": "MultipleSetVariables_FetchPipelineName_IDpipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait For Setting Value of a Variable",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 3
+				}
+			},
+			{
+				"name": "Set File Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Wait For Setting Value of a Variable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "myFileName",
+					"value": {
+						"value": "@pipeline().parameters.FileName",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Running Pipeline Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set File Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RunningPipelineName",
+					"value": {
+						"value": "@pipeline().Pipeline",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Running Pipeline ID",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Running Pipeline Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RunningPipelineID",
+					"value": {
+						"value": "@pipeline().RunId",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"FileName": {
+				"type": "string",
+				"defaultValue": "Test"
+			}
+		},
+		"variables": {
+			"myFileName": {
+				"type": "String"
+			},
+			"RunningPipelineName": {
+				"type": "String"
+			},
+			"RunningPipelineID": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-09-18T04:09:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
